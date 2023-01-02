@@ -6,7 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default function Login(){
     const navigation = useNavigation();
     const [bloqueado, setBloqueado] = useState(true); 
-
+    const [user, setUser] = useState('');
+    const [senha, setSenha] = useState('');
+    
     function irParaHomeScreen(){
         navigation.navigate('HomeScreen')
     }
@@ -23,7 +25,7 @@ export default function Login(){
                     <TextInput
                     style={styles.input}
                     placeholder='número de matrícula'
-                    onChangeText={(texto) => setMatricula(texto)}
+                    onChangeText={(texto) => setUser(texto)}
                     />
                 </View>
 
