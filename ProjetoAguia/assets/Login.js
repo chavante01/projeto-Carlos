@@ -13,6 +13,31 @@ export default function Login(){
         navigation.navigate('HomeScreen')
     }
 
+    function requestLogin()
+    {
+      var axios = require("axios").default;
+
+      var options = {
+        method: 'POST',
+        url: 'http://10.0.0.151:3001/login',
+        headers: {'Content-Type': 'application/json'},
+        data: {name: user, password: senha}
+      };
+      
+      axios.request(options).then(function (response) {
+        if (response.data != "logado" ){
+          console.log("deu merda");
+        }
+        else{
+          irParaHomeScreen();
+          console.log("logado com sucesso")
+        }
+        //console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+
     function irCadastrar(){
         navigation.navigate('Cadastro');
     }
@@ -43,7 +68,7 @@ export default function Login(){
                         }
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.entrar} onPress={irParaHomeScreen}>
+                <TouchableOpacity style={styles.entrar} onPress={requestLogin}>
                     <Text style={{color:'#000', fontSize:15}}>Entrar</Text>
                 </TouchableOpacity>
                 <View style={styles.cadastramento}>
