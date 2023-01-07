@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icone from './icone-cadastro.svg';
 
 export default function Cadastro(){
     const navigation = useNavigation();
@@ -19,46 +20,39 @@ export default function Cadastro(){
 
     return(
         <View style={styles.container}>
-            <TextInput style={styles.input} placeholder='Nome' onChangeText={(text) => setNome(text)}/>
-                
-            <TextInput style={styles.input} placeholder='Sobrenome' onChangeText={(text) => setSobrenome(text)}/>
-                
-            <TextInput style={styles.input} placeholder='Senha' onChangeText={(text) => setSenha(text)}/>
-                
-            <TextInput style={styles.input} placeholder='Confirme a senha' onChangeText={(text) => setConfirm(text)}/>
-                
-            <TouchableOpacity style={styles.button} onPress={cadastrar}>
-                <Text style={{color:'#000'}}> Criar Conta</Text>
-            </TouchableOpacity>
-        </View>
+            <View style={styles.cabeçalho}>
+                <Icone width={225} height={225}/>
+                <Text style={{fontSize:20, color:'#000'}}>Criando sua Conta !!!</Text>
+            </View>
+            <View style={styles.corpo}>
+                <TextInput style={styles.inputs} placeholder='qualquer merda' />
+            </View>
 
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
+        backgroundColor:'#EFD9CE'
+    },
+    cabeçalho:{
+        flex:0.35,
+        justifyContent:'flex-start',
+        alignItems:'center',
+        width:'100%',
+        backgroundColor:'red'
+    },
+    corpo:{
+        flex:0.65,
+        justifyContent:'flex-end',
         alignItems:'center',
     },
-    input:{
-        width:'90%',
-        height:50,
+    inputs:{
+        width:'85%',
+        height:40,
         borderWidth:1,
-        borderRadius:18,
-        marginTop:10,
-        padding:10,
-        fontSize:15,
-    },
-    button:{
-        alignItems:'center',
-        justifyContent:'center',
-        width:'60%',
-        height:50,
-        borderRadius:18,
-        marginTop:20,
-        padding:10,
-        fontSize:15,
-        backgroundColor:'#51ad72',
+        borderColor:'green'
     }
-
-})
+  })
