@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+const image = { uri: "https://i.pinimg.com/564x/38/9a/67/389a678a114f96c5b3d979a798f56f79.jpg" };
 export default function Login(){
     const navigation = useNavigation();
     const [bloqueado, setBloqueado] = useState(true); 
@@ -19,43 +20,45 @@ export default function Login(){
 
     return(
         <View style={styles.container}>
-
+          <ImageBackground source={image} resizeMode='cover' style={{width:'100%', height:'100%', alignItems:'center', justifyContent:'flex-end'}}>
             <View style={styles.areadosinput}>
                 <View style={styles.inputMatricula}>
                     <TextInput
                     style={styles.input}
-                    placeholder='número de matrícula'
+                    placeholder='E-mail ou nome de usuário'
+                    placeholderTextColor="#f5efff"
                     onChangeText={(texto) => setUser(texto)}
                     />
                 </View>
 
                 <View style={styles.senhaArea}>    
                     <TextInput style={styles.input}
-                    placeholder='senha'
+                    placeholder='Senha'
+                    placeholderTextColor="#f5efff"
                     secureTextEntry={bloqueado}
                     onChangeText={(texto) => setSenha(texto)}
                     />
                     <TouchableOpacity style={styles.icone} onPress={(() => setBloqueado(!bloqueado))}>
                         {bloqueado?
-                        <Ionicons name="eye-off" size={20}/>
+                        <Ionicons name="eye-off" size={20} color={'#f5efff'}/>
                         :
-                        <Ionicons name="eye" size={20}/>
+                        <Ionicons name="eye" size={20} color={'#f5efff'}/>
                         }
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.entrar} onPress={irParaHomeScreen}>
-                    <Text style={{color:'#000', fontSize:15}}>Entrar</Text>
+                    <Text style={{color:'#f5efff', fontSize:15}}>Entrar</Text>
                 </TouchableOpacity>
                 <View style={styles.cadastramento}>
                 <TouchableOpacity styles={{margin:10}}>
-                    <Text style={{color:'#000', fontSize:15}}>Esqueceu a senha?</Text>
+                    <Text style={{color:'#f5efff', fontSize:15}}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={irCadastrar}>
-                    <Text style={{color:'#000', fontSize:15}}>Faça seu cadastro!!!</Text>
+                    <Text style={{color:'#f5efff', fontSize:15}}>Faça seu cadastro!!!</Text>
                 </TouchableOpacity>  
                 </View>        
             </View> 
-
+        </ImageBackground>
       </View>
     );
 }
@@ -63,17 +66,15 @@ export default function Login(){
 const styles = StyleSheet.create({
     container:{
       flex:1,
-      marginTop:50,
-      alignItems:'center',
-      backgroundColor:'Blue',
     },
     areadosinput:{
-      flex:2,
       justifyContent:'center',
       alignItems:'center',
-      width:'100%',
-      position:'absolute',
-      marginTop:250
+      width:'80%',
+      aspectRatio:1,
+      marginBottom:80,
+      backgroundColor:'rgba(0, 0, 0, 0.5)',
+      borderRadius:20,
     },
     inputMatricula:{
       width:'90%',
@@ -89,15 +90,15 @@ const styles = StyleSheet.create({
       borderWidth:1,
       borderRadius:5,
     },
+    icone:{
+      justifyContent:'center'
+    },
     input:{
       width:'90%',
       height:50,
       padding:10,
       fontSize:15,
-    },
-    icone:{
-      justifyContent:'center',
-      width:'10%'
+      color:'#f5efff',
     },
     entrar:{
       alignItems:'center',
@@ -114,7 +115,6 @@ const styles = StyleSheet.create({
       marginTop:10,
       width:'100%',
       
-
     }
     
   });
