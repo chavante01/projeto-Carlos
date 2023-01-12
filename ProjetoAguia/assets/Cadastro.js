@@ -11,14 +11,38 @@ export default function Cadastro(){
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [confirm, setConfirm] = useState('');
+    const [passwordConfirmation, setConfirm] = useState('');
 
-    function cadastrar(){
-        if(senha != confirm){
-            alert("Senha escrita de forma incorreta!!!")
-        }else{
-            navigation.navigate('Login')
-        }  
+
+    function irParaLogin(){
+        navigation.navigate('Login');
+      }
+    function requestCadastro()
+    {
+      var axios = require("axios").default;
+
+      var options = {
+        method: 'POST',
+        url: 'http://18.206.54.38:3001/SignUp',
+        headers: {'Content-Type': 'application/json'},
+        data: {name: nome, email:email,password: senha, passwordConfirmation: passwordConfirmation}
+      };
+      
+      axios.request(options).then(function (response) {
+        if (response.data != "Registrado com sucesso!"){
+          console.log(response.data);
+          alert(response.data);
+        }
+        else{
+            console.log("Registrado com sucesso!");
+            alert(response.data);
+            //sleep(30);
+            irParaLogin();
+        }
+        //console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
     }
 
     return(
@@ -67,7 +91,7 @@ export default function Cadastro(){
                         </TouchableOpacity>
                     </View>
                     
-                    <TouchableOpacity style={styles.botao} onPress={cadastrar}>
+                    <TouchableOpacity style={styles.botao} onPress={requestCadastro}>
                         <Text style={{color:'#EBEBEB', fontSize:17}}>Cadastrar</Text>
                     </TouchableOpacity>
                 </View>
